@@ -20,7 +20,7 @@ MACOS_NAME = "mac os"
 LINUX_NAME = "linux"
 WINDOWS_NAME = "windows"
 
-DEFAULT_RELEASE_BASE_URL = "https://github.com/indygreg/python-build-standalone/releases/download"
+DEFAULT_RELEASE_BASE_URL = "https://github.com/ninehills/python-build-standalone/releases/download"
 
 # When updating the versions and releases, run the following command to get
 # the hashes:
@@ -184,13 +184,14 @@ TOOL_VERSIONS = {
         "strip_prefix": "python",
     },
     "3.10.9": {
-        "url": "20230116/cpython-{python_version}+20230116-{platform}-{build}.tar.gz",
+        "url": "20230308/cpython-{python_version}+20230308-{platform}-{build}.tar.gz",
         "sha256": {
             "aarch64-apple-darwin": "018d05a779b2de7a476f3b3ff2d10f503d69d14efcedd0774e6dab8c22ef84ff",
             "aarch64-unknown-linux-gnu": "2003750f40cd09d4bf7a850342613992f8d9454f03b3c067989911fb37e7a4d1",
             "x86_64-apple-darwin": "0e685f98dce0e5bc8da93c7081f4e6c10219792e223e4b5886730fd73a7ba4c6",
             "x86_64-pc-windows-msvc": "59c6970cecb357dc1d8554bd0540eb81ee7f6d16a07acf3d14ed294ece02c035",
             "x86_64-unknown-linux-gnu": "d196347aeb701a53fe2bb2b095abec38d27d0fa0443f8a1c2023a1bed6e18cdf",
+            "ppc64le-unknown-linux-gnu": "8ee55545b6ac7c8a2c6a9849ab13871ed18db71b2d80d20f5649a9f04ded9131",
         },
         "strip_prefix": "python",
     },
@@ -236,6 +237,17 @@ PLATFORMS = {
         # Matches the value returned from:
         # repository_ctx.execute(["uname", "-m"]).stdout.strip()
         arch = "aarch64",
+    ),
+    "ppc64le-unknown-linux-gnu": struct(
+        compatible_with = [
+            "@platforms//os:linux",
+            "@platforms//cpu:ppc64le",
+        ],
+        os_name = LINUX_NAME,
+        # Note: this string differs between OSX and Linux
+        # Matches the value returned from:
+        # repository_ctx.execute(["uname", "-m"]).stdout.strip()
+        arch = "ppc64le",
     ),
     "x86_64-apple-darwin": struct(
         compatible_with = [
