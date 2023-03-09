@@ -20,7 +20,7 @@ MACOS_NAME = "mac os"
 LINUX_NAME = "linux"
 WINDOWS_NAME = "windows"
 
-DEFAULT_RELEASE_BASE_URL = "https://github.com/indygreg/python-build-standalone/releases/download"
+DEFAULT_RELEASE_BASE_URL = "https://github.com/ninehills/python-build-standalone/releases/download"
 
 # When updating the versions and releases, run the following command to get
 # the hashes:
@@ -102,13 +102,22 @@ TOOL_VERSIONS = {
         },
         "strip_prefix": "python",
     },
+    "3.10.9": {
+        "url": "20230308/cpython-{python_version}+20230308-{platform}-{build}.tar.gz",
+        "sha256": {
+            "ppc64le-unknown-linux-gnu": "8ee55545b6ac7c8a2c6a9849ab13871ed18db71b2d80d20f5649a9f04ded9131",
+        },
+        "strip_prefix": "python",
+    },
+
 }
+
 
 # buildifier: disable=unsorted-dict-items
 MINOR_MAPPING = {
     "3.8": "3.8.13",
     "3.9": "3.9.12",
-    "3.10": "3.10.4",
+    "3.10": "3.10.9",
 }
 
 PLATFORMS = {
@@ -122,16 +131,15 @@ PLATFORMS = {
         # repository_ctx.execute(["uname", "-m"]).stdout.strip()
         arch = "arm64",
     ),
-    "aarch64-unknown-linux-gnu": struct(
+    "ppc64le-unknown-linux-gnu": struct(
         compatible_with = [
             "@platforms//os:linux",
-            "@platforms//cpu:aarch64",
         ],
         os_name = LINUX_NAME,
         # Note: this string differs between OSX and Linux
         # Matches the value returned from:
         # repository_ctx.execute(["uname", "-m"]).stdout.strip()
-        arch = "aarch64",
+        arch = "ppc64le",
     ),
     "x86_64-apple-darwin": struct(
         compatible_with = [
