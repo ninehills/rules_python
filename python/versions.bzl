@@ -241,7 +241,6 @@ PLATFORMS = {
     "ppc64le-unknown-linux-gnu": struct(
         compatible_with = [
             "@platforms//os:linux",
-            "@platforms//cpu:ppc64le",
         ],
         os_name = LINUX_NAME,
         # Note: this string differs between OSX and Linux
